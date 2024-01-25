@@ -6,6 +6,7 @@ import java.sql.SQLException;
 public class Display_admin {
     private JFrame frame;
 
+
     public Display_admin() {
         frame = new JFrame("Book Browser -admin Page");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,6 +51,12 @@ public class Display_admin {
         JButton BookManagementButton = new JButton("도서 관리");
         BookManagementButton.setBounds(400, 450, 500, 100);
         frame.add(BookManagementButton);
-
+        BookManagementButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new Display_BookManagement();
+            }
+        });
     }
 }

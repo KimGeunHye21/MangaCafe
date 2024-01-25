@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 public class Display_DatabaseConnection {
     private JFrame frame;
@@ -55,10 +59,27 @@ public class Display_DatabaseConnection {
 
 
         JButton saveButton = new JButton("Save");
-        saveButton.setBounds(400, 600, 70, 30);
+        saveButton.setBounds(600, 600, 70, 30);
         frame.add(saveButton);
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    File directory = new File("" + Paths.get("").toAbsolutePath());
+                    if (!directory.exists()) directory.mkdir();
 
+                    File file = new File(directory, "DatabasePath.txt");
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                    writer.write(urlTextField.getText() + "\n" + usernameTextField.getText() + "\n" + passwordTextField.getText());
 
+                    writer.close();
 
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    System.out.println("데이터베이스 정보를 다시 입력해주십시오.");
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 }

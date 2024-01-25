@@ -38,7 +38,6 @@ public class Display_main {
         allBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
             }
         });
 
@@ -60,7 +59,7 @@ public class Display_main {
             public void actionPerformed(ActionEvent e)  {
                 String find = findText.getText();
                 try {
-                    showBookInfo(dbConnection.SearchBook(find));
+                    showBookInfo(dbConnection.SearchBookTitle(find));
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
